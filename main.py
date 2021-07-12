@@ -26,11 +26,8 @@ async def competing(statuss):
 
 client = commands.Bot(command_prefix = '!')
 
-server_id = 859784071046627388
-role1 = 859787450959396865
-role2 = 859786838109978625
-role3 = 859795332631363585
-admins_id = [610453921726595082, 687362741165621492, 847387836432384021]
+server_id = # id сервера
+admins_id = [# кто сможет разьёбывать]
 
 with open('statuses.txt', encoding='utf-8') as f:
 	statuses_array = f.readlines()
@@ -63,9 +60,9 @@ async def command(ctx, *, user: discord.Member=None):
 	access_role = discord.utils.get(server.roles, name='〘.!.〙доступ к !выебать')
 	if access_role in ctx.author.roles:
 		server = discord.utils.get(client.guilds, id=server_id)
-		role11 = discord.utils.get(server.roles, name='〘.!.〙Мать в канаве')
-		role22 = discord.utils.get(server.roles, name='〘.!.〙Долбаеб')
-		role33 = discord.utils.get(server.roles, name='〘.!.〙был выебан админами')
+		role11 = discord.utils.get(server.roles, name='') # имя ролей которые будут даваться + роль для чека(по типу был выебан)
+		role22 = discord.utils.get(server.roles, name='')
+		role33 = discord.utils.get(server.roles, name='')
 		if user:
 			if user.id != client.user.id:
 				try:
@@ -85,13 +82,6 @@ async def command(ctx, *, user: discord.Member=None):
 	else:
 		await ctx.send('а вот хуй тебе :)))))))')
 
-@command.error
-async def command2_error(error):
-	if isinstance(error, commands.errors.MemberNotFound):
-	  await ctx.send(f'{ctx.author.mention}, пользователя нет на сервере.')
-	else:
-	  pass
-
 @client.command(aliases=['start'])
 async def yt(ctx):
 	try:
@@ -105,7 +95,7 @@ async def yt(ctx):
 									'temporary': False,
 									'validate': None
 								}
-		headers={'content-type': 'application/json','Authorization': f"Bot ODU5ODY1MDgxNTkxNjI3Nzc2.YNy5wg.2R9VwwAEKnHQihnnhR7rs7N_IB0"}
+		headers={'content-type': 'application/json','Authorization': f"Bot """" токен """"}
 		r=requests.post(url, data=json.dumps(params), headers=headers)
 		
 		buttons = [Button(style = ButtonStyle.URL, url = f"https://discord.gg/{r.json()['code']}", label = 'Начать просмотр(только с пк)')]
@@ -121,9 +111,9 @@ async def yt(ctx):
 @client.command(aliases=['чекнуть', 'чек', 'проверить', 'выебан-ли'])
 async def __command2(ctx, *, user: discord.Member=None):
 	server = discord.utils.get(client.guilds, id=server_id)
-	role11 = discord.utils.get(server.roles, name='〘.!.〙Мать в канаве')
-	role22 = discord.utils.get(server.roles, name='〘.!.〙Долбаеб')
-	role33 = discord.utils.get(server.roles, name='〘.!.〙был выебан админами')
+	role11 = discord.utils.get(server.roles, name='') # те же роли как и у !выебать
+	role22 = discord.utils.get(server.roles, name='')
+	role33 = discord.utils.get(server.roles, name='')
 	roles1 = [role11, role22]
 	roles2 = [role11, role22, role33]
 	try:
@@ -146,30 +136,7 @@ async def __command2(ctx, *, user: discord.Member=None):
 	except MemberNotFound:
 		await ctx.send(f'{ctx.author.mention}, пользователя нет на сервере.')
 
-@client.command()
-async def execc(ctx, *, command):
-	if ctx.author.id in admins_id:
-		"""Evaluate the given python code"""
-		if match := re.fullmatch(r"(?:\n*)?`(?:``(?:py(?:thon)?\n)?((?:.|\n)*)``|(.*))`", command, re.DOTALL):
-			code = match.group(1) if match.group(1) else match.group(2)
-			str_obj = io.StringIO()  # Retrieves a stream of data
-			try:
-				with contextlib.redirect_stdout(str_obj):
-					exec(code)
-			except Exception as e:
-				return await ctx.send(f"""❌ Your code completed with execution code 1
-				```
-				{e.__class__.__name__}: {e}
-				```""")
-			embed = discord.Embed(description="Error: Invalid format", color=0xED2525)
-			return await ctx.send(embed=embed)
-		return await ctx.send(f"""✅ Your code completed with execution code 0
-				```
-				{str_obj.getvalue()}
-				```""")
-
-	else:
-		await ctx.send('а хуй тебе')
+# так и не сделал
 
 @client.command(aliases=['заскамить', 'скам'])
 async def comand2(ctx, *, user: discord.Member=None):
@@ -189,8 +156,8 @@ async def comand2(ctx, *, user: discord.Member=None):
 async def command333(ctx, *, user: discord.Member=None):
 	if ctx.author.id in admins_id:
 		server = discord.utils.get(client.guilds, id=server_id)
-		role11 = discord.utils.get(server.roles, name='〘.!.〙Мать в канаве')
-		role22 = discord.utils.get(server.roles, name='〘.!.〙Долбаеб')
+		role11 = discord.utils.get(server.roles, name='') # роли которые убираем
+		role22 = discord.utils.get(server.roles, name='')
 		try:
 			await user.remove_roles(role11)
 			await user.remove_roles(role22)
@@ -198,5 +165,5 @@ async def command333(ctx, *, user: discord.Member=None):
 		except:
 			await ctx.send('чёт не вышло.')
 	else:
-		await ctx.send('а вот ты никто и звать тебя никак; соси тимоше, розилу или самсунг ассистенту, чтобы они разьебали чела.')
-client.run('ODU5ODY1MDgxNTkxNjI3Nzc2.YNy5wg.2R9VwwAEKnHQihnnhR7rs7N_IB0')
+		await ctx.send('а вот ты никто и звать тебя никак; (люди которые в admin_ids), чтобы они разьебали чела.')
+client.run('токен")
